@@ -1,0 +1,54 @@
+%h1 Welcome to the Superheroes Essentials Store
+
+
+- if current_session != nil
+  %h2 #{current_session}
+%p
+%p
+Your Items:                       Your Credits #{current_user.credits}
+
+%table{:border => 1}
+  %tbody
+    %tr
+      %th{:width => "200"} Name
+      %th{:width => "200"} Price
+      %th{:width => "80"} Status
+  - for item in current_user.item_list
+    %tr
+      %td #{item.name}
+      %td #{item.price}
+      %td
+        - if item.active
+          for sale
+        - else
+          not for sale
+
+%p
+Items of the other Users:
+%p
+
+
+- for user in users
+  - if user != current_user
+    %p
+    - if !user.item_list.empty?
+      %table{:border => 1}
+        %tbody
+          %tr
+            %th{:width => "200"} User
+            %th{:width => "200"} Name
+            %th{:width => "80"} Price
+            %th{:width => "80"} Status
+        - for item in user.item_list
+          %tr
+            %td #{user.name}
+            %td #{item.name}
+            %td #{item.price}
+            %td
+              - if item.active
+                %form( action="/trade" method="POST" )
+                  %input(type="hidden" name="name_owner" value="#{user.name}")
+                  %input(type="hidden" name="item_name" value="#{item.name}")
+                  %input(type="submit" value="buy")
+              - else
+                not for sale

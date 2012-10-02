@@ -1,0 +1,9 @@
+
+1. The get and post requests get mapped by Sinatra. Therefore its possible to use templates which results in Haml or
+    other Template Engines.
+
+2. Because GET requests don't modify a model. They are only existent to represent existing models. For updating we use
+    other requests like update, patch or put
+
+3. In the V of the MVC to hang on to a well established pattern. If you mess around in the Model or the Controller it's
+    going to be a mess. (Experience of P2)

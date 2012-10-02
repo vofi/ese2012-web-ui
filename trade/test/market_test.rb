@@ -1,7 +1,7 @@
 require 'test/unit'
-require 'app/item'
-require 'app/user'
-require 'app/market'
+require 'app/models/store/item'
+require 'app/models/store/user'
+require 'app/models/store/market'
 
 class MyTest < Test::Unit::TestCase
 
@@ -64,12 +64,12 @@ class MyTest < Test::Unit::TestCase
     user3.offer_item(0)
     user3.offer_item(1)
     market.get_items_to_sell
-    user1.buy(2, market)   #buying bow
+    user1.buy('Bow', market)   #buying bow
     market.get_items_to_sell
-    user2.buy(0, market)  # buying Mark I
+    user2.buy('Mark I', market)  # buying Mark I
     market.get_items_to_sell
-    user2.buy(0, market)  # buying Mark II
-    user3.buy(0, market)  # buying Arrow
+    user2.buy('Mark II', market)  # buying Mark II
+    user3.buy('Arrow', market)  # buying Arrow
 
     assert_equal(user1.credits, 80)
     assert_equal(user2.credits, 80)
